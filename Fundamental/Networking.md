@@ -1,0 +1,99 @@
+1. **HTTP vs HTTPS**
+	- HTTP 0.9: Chỉ hỗ trợ GET. không có header. response chỉ có html
+	- HTTP 1:
+		- Có thêm status code, response được nhiều loại hơn như gif.
+		- TCP three-way handshake for each connection => not re-used connection. open -> closed connection for each request & response
+	- HTTP 1.1: 
+		- provide keep-alive mechism => TCP three-way handshake one time => re-used connection => optimize cost. open -> request & response more time -> closed => presistent connections
+		- HTTP pipelining: 
+			- allow client send multiple requests before waiting for each response. 
+			- the response must received in the same order as to requests
+			- if request before is failed, maybe packet loss, many requests after is blocked => head of line blocking
+			- to handle it, can send multiple requests in multiple connections in parallel 
+	- HTTP 2:
+		- compress header
+		- use stream for sending data
+		- the response mustn't received in the same order as requests
+		- allow server push
+	- HTTPS:
+		- encrypt data compare to http
+		- step:
+			- 1: three-way handshake to create connection
+			- 2: client say hello
+			- 3: server say hello
+			- 4: server send certificate include more info such as: pub key, TLS version... server hello done
+			- 5: client generate session key, encrypt it by pub key received from server. using asymmetric
+			- 6: server decrypt this by private key to get correct session key
+			- 7: after that, server sending data after encrypt symmetric by session key and client decrypt data by session key
+		- why dont use asymmetric at all: asymmetric computation cost is more expensive than symmetric, not suitable for bulk data transmition (data's length after asymmetric encryption can the same or larger than original data)
+
+2. **RPC vs gRPC**
+	- RPC: remote procedure call - pattern
+	- gRPC: implement RPC pattern
+	- why gRPC is faster than restful
+		- Protocol Buffer: binary encoding format -> faster than encode/decode faster than JSON
+		- At transport layer: HTTP 2 -> allow multiple streams of messages over a single long-lived TCP connection -> handle many concurrent RPC calls over small number of connections
+	- why gRPC more compatible with server-server than web client - server
+		- No browsers currently provide the level of control required over web requests to support a gRPC client => gRPC web: use proxy to make gRPC calls from a browser
+3. **DNS Lookup**
+	- 1: enter URL
+	- 2: browser find infor in its cache
+	- 3: if cache miss, browser asks the operating system
+	- 4: OS cache for itself, if cache miss, step 5
+	- 5: browser ask DNS resolver
+	- 6: DNS resolver ask DNS server
+	- 7: browser has server's IP.
+	- 8: create connection and trao đổi chiêu thức
+4. TCP/UDP
+	- TCP (transmission control protocol) và UDP (user datagram protocol) là giao thức truyền dữ liệu giữa các máy .
+	- TCP:
+		- truyền thông tin cậy, đảm bảo không mất mát dữ liệu giữa quá tình truyền tin và nó đúng thứ tự các gói tin. có khả năng fix lỗi mất mát dữ liệu
+		- cần thiết lập kết nối thông qua bắt tay 3 bước:
+			- client gửi SYN đến server
+			- server gửi SYN + ACK đến client
+			- client gửi ACK cho server
+		- sau khi nhận dữ liệu từ server, client cần gửi lại thông tin ACK đã nhận dữ liệu cho server và yêu cầu dữ liệu mới.
+		- dữ liệu ở đây là segment. data sẽ được segmentation thành các segment nhỏ hơn. và truyền tuần tự các segment này.
+		- ứng dụng: truyền file, email...
+			- FTP
+			- Telnet
+			- HTTP
+		- Cải thiện tốc độ bằng window size
+	- UDP:
+		- truyền tin không tin cậy. dữ liệu trên đường truyền có thể bị mất mát. nhưng bù lại có tốc độ nhanh hơn TCP vì không cần gửi lại gói tin bị mất.
+		- không cần thiết lập kết nối bắt tay 3 bước.
+		- ứng dụng: 
+			- livestream
+			- xem video
+			- gaming...
+	- DNS mix TCP và UDP
+7. OSI dựa vào OSI có thể truy vết được khắc phục lỗi
+		- 7. Application
+			- giao diện người dùng
+			- HTTP, FTP..
+		- 6. Presentation
+			- nén dữ liệu
+			- mã hoá, giải mã
+		- 5. Session
+			- thiết lập, duy trì, chấm dứt các phiên
+			- 1 card mạng nhưng có thể vừa chơi game, vừa lướt quét. chia các mốc thời gian để game truy cập mạng, sau đó web truy cập mạng
+			- RPC
+		- 4. Transport: 
+			- TCP UDP
+			- truyền tải dữ liệu
+		- 3. Network
+			- routing định tuyến data packet
+			- chọn đường đi tốt nhất
+		- 2. Data link:
+			- Đánh địa chỉ MAC
+			- switch
+			- wifi
+		- 1. Physical: 
+			- binary 010101010
+			- định nghĩa về các đặc tả của các thiết bị vật lý trong không gian mạng. 
+			- card mạng
+	- TCP/IP:
+		- 7.6.5. Application
+		- 4. Transport
+		- 3. Internet
+		- 2. 1. Network Access

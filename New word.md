@@ -1,0 +1,30 @@
+- mechanism: cơ chế
+- agnostic
+- stub: 
+- ecosystem: hệ sinh thái
+- thriving: phát triển mạnh
+- interchange: trao đổi
+- wire: dây
+- suite: phù hợp
+- efficient - efficiency: hiệu quả
+- interact: tương tác
+- reach: tiếp cận - đạt đến
+- involved: tham gia, tham dự, dính líu, liên quan
+- involves: bao gồm
+- hierarchy: hệ thống phân cấp
+- make sense: có ý nghĩa
+- compatible: tương thích
+- relies: phụ thuộc
+- primitive: nguyên thuỷ, sơ khai
+- possible: có thể
+- corresponding: tương ứng, phù hợp
+- no longer: không còn
+- integrity: toàn vẹn
+- relevant: có liên quan, liên quan, phù hợp
+- elaboarate: công phu, phức tạp
+- fortunate: may mắn
+- even: thậm chí
+- tuning: điều chỉnh
+- knob: núm điều chỉnh
+- constructed: xây dựng, chế tạo
+- approach: tiếp cận

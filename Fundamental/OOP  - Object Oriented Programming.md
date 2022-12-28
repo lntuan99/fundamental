@@ -1,0 +1,35 @@
+1.  4 tính chất cơ bản của OOP
+	- Đóng gói (Encapsulation): 
+		- Che giấu các thuộc tính, tính chất của đối tượng. các đối tượng khác chỉ được phép truy cập các thuộc tính, tính chất này thông qua các public hàm mà đối tượng cung cấp.
+		- Ví dụ: nhà sản xuất điện thoại chỉ cung cấp các tiện ích trên chiếc điện thoại mà không mong muốn người dùng biết được cấu tạo bên trong của nó
+	- Kế thứa (Inheritance): 
+		- Các class con được thừa hưởng các thuộc tính và phương thức của class cha (mà nó được phép kế thừa)
+		- Ví dụ: lớp cha điện thoại có hệ điều hành, khe cắm sim, màu sắc. lớp con iphone, zflip kế thừa điện thoại cũng có hệ điều hành, khe cắm sim, màu sắc..
+	- Đa hình (polymorphim):
+		- Các class con khi kế thừa class cha có thể thực thi các phương thức của class cha theo nhưng cách khác nhau
+		- Ví dụ: điện thoại iphone khi khởi động sẽ hiển thị quả táo, thay vì xiaomi hay zflip sẽ hiển thị logo android
+		- Ví dụ 2: chó, mèo kế thừa động vật, nhưng khi phát ra tiếng kêu thì chó kêu gâu gâu, mèo kêu meo meo
+	- Trừu tượng (Abstraction):
+		- Không đem đầy đủ đối tượng ngoài thực tiễn vào lập trình. Tổng quát hoá, chỉ quan tâm đến những tính chất, thuộc tính, phương thức cần thiết để giải quyết bài toán mình gặp phải.
+		- Ví dụ: bài toán cần giải quyết là kết luận trẻ có bmi bình thường hay không thì ta chỉ quan tâm birthday, chiều cao, cân nặng, giới tính. không cần quan tâm địa chỉ nhà, số điện thoại hay cha mẹ là ai.
+2. Design pattern:
+	- Có 3 nhóm:
+		- Creational: khởi tạo class
+		- Structural: thiết lập, định nghĩa quan hệ giữa các đối tượng
+		- Behavioral: quan hệ hành vi để xử lí các chức năng giữa các đối tượng trong hệ thống
+	- Một số mẫu phổ biến:
+		- Singleton: thuộc nhóm creational. khởi tạo một instance duy nhất cho cả chương trình. thường dùng cho shared resource như logger, caching, config
+		- Factory: thuộc nhóm creational. khởi tạo một object nhưng tuỳ vào logic, điều kiện cụ thể để xác định object. ví dụ tạo một object animal thì tuỳ vào điều kiện để xác định đó là con chó hay con mèo.  nhưng nếu nhiều chỗ cần khởi tạo sẽ khiến nhiều chỗ bị duplicate code, code rườm rà, khó mở rộng. Tách biệt phần khởi tạo ra một lớp khác, dễ theo dõi, mở rộng hơn. Thường dùng với class có nhiều subclass, dựa trên điều kiện đầu vào để trả về 1 subclass xác định
+		- Builder: build từng phần của đối tượng. ví dụ: gorm, filter
+		- Iterator
+3. SOLID:
+	- Single responsibility principle - nguyên lý đơn nhiệm: mỗi class chỉ nên giữ một trách nhiệm duy nhất.  Ví dụ class person thì không nên có method savePersonInfoIntoDb.
+	- Open/Closed principle - nguyên lý đóng/mở: thoải mái mở rộng nhưng hạn chế sửa đổi bên trong. => mở rộng bằng kế thừa. VD khẩu súng: để bắn xa gắn thêm ống ngắm, không gây tiếng động gắn nòng giảm thanh, thêm đạn gắn băng đạn phụ => hoàn toàn không thay đổi kết cấu có sẵn khẩu súng. vi phạm nhiều nhấtL helper, utilities.
+	- Liskov substitution principle: trong một chương trình, các object của class con có thể thay thế class cha mà không làm thay đổi tính đúng đắn của chương trình. VD: pin tròn, pin tiểu, pin đại kế thừa pin, nhưng thay pin tiểu vào điện thoại thì điện thoại không chạy được. Chim cánh cụt là chim nhưng không thể thay thế cho chim trong ngữ cảnh chim cần bay
+	- Interface segregation principle - nguyên lý phân tách interface: thay vì dùng một interface lớn, ta nên tách thành nhiều interface nhỏ với những mục đích cụ thể. Ví dụ như Animal co Eat, Drink, Sleep. Dog, Cat kết thừa animal, sau đó Animal thêm Fly, Swim cho Bird và Fish thì Dog và Cat cũng cần phải implement những method này => dư thừa. Phân tách ra IBird có method Fly, IFish có class swim. 
+	- Dependency Inversion principle - nguyên lý đảo ngược phụ thuộc: 
+		- module cấp cao không phụ thuộc vào cấp thấp. Cả 2 nên phụ thuộc vào interface
+		- interface (abstraction) không nên phụ thuộc vào chi tiết mà ngược lại (các class giao tiếp với nhau thông qua interface chứ không phải implementation)
+		- => dễ dàng thay thế, sửa đổi module cấp thấp mà không ảnh hưởng đến module cấp cao
+		- VD: module cấp cao là ổ điện, interface là đuôi tròn, module cấp thấp là bóng đèn sợi tóc và bóng đèn huỳnh quang. ổ điện không quan tâm đến implementation là bóng sợi tóc hay huỳnh quang, mà chỉ quan tâm đến interface là đuôi tròn.
+		- => note: dependency injection
