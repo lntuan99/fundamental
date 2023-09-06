@@ -28,3 +28,4 @@
 - knob: núm điều chỉnh
 - constructed: xây dựng, chế tạo
 - approach: tiếp cận
+- aaaa
